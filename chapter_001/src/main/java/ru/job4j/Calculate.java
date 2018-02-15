@@ -10,11 +10,11 @@ public class Calculate {
 	* Method main
 	* @param args
 	*/
-	
+	Integer rwer = 1;
 	public static void main(String[] args) {
 		System.out.println("Hello world");
 	}
-	
+
 	/**
 	* Method echo.
 	* @param name Your name.
