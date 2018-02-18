@@ -6,7 +6,7 @@ public class StringContains {
         char[] originAr = origin.toCharArray();
         char[] subAr = sub.toCharArray();
         boolean result = false;
-        for (int i=0; i < originAr.length - subAr.length; i++){
+        for (int i=0; i < originAr.length - subAr.length+1; i++){
             boolean stepRstl = true;
             for (int j=0; j < subAr.length;j++) {
                 if (originAr[i+j] != subAr[j]) {
