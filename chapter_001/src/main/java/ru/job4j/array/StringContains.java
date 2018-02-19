@@ -7,15 +7,12 @@ public class StringContains {
         char[] subAr = sub.toCharArray();
         boolean result = false;
         for (int i=0; i < originAr.length - subAr.length+1; i++){
-            boolean stepRstl = true;
+            result = true;
             for (int j=0; j < subAr.length;j++) {
                 if (originAr[i+j] != subAr[j]) {
-                    stepRstl = false;
+                    result = false;
                     j = subAr.length;
                 }
-            }
-            if (stepRstl){
-                result = true;
             }
         }return result;
     }
