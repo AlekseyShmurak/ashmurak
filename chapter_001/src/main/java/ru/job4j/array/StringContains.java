@@ -11,8 +11,11 @@ public class StringContains {
             for (int j=0; j < subAr.length;j++) {
                 if (originAr[i+j] != subAr[j]) {
                     result = false;
-                    j = subAr.length;
+                    break;
                 }
+            }
+            if (result) {
+                break;
             }
         }return result;
     }
