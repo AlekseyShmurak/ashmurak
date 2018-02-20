@@ -26,4 +26,5 @@ public class ArrayChar {
         // проверить. что массив data имеет первые элементы одинаковые с value
         return result;
     }
+
 }
