@@ -52,7 +52,7 @@ public class Tracker {
         for (int i=0; i < this.items.length; i++) {
             if (this.items[i] == null) {
                 output = new Item[i];
-                System.arraycopy(this.items,0,output, 0,output.length -1);
+                System.arraycopy(this.items,0,output, 0,output.length);
                 break;
             }
         }
