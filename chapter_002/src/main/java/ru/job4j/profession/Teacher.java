@@ -2,7 +2,7 @@ package ru.job4j.profession;
 
 public class Teacher extends Profession {
 
-    Teacher (String name) {
+    Teacher(String name) {
         this.name = name;
     }
 

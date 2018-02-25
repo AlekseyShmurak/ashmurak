@@ -14,7 +14,7 @@ public class StartUI {
     private static final String NAME = "5"; // Константа меню для поика заявки по имени
     private static final String EXIT = "6"; //Константа для выхода из цикла.
     private final Input input; //Получение данных от пользователя.
-    private final Tracker tracker;//Хранилище заявок.
+    private final Tracker tracker; //Хранилище заявок.
 
     /**
      * Конструтор инициализирующий поля.
@@ -38,15 +38,15 @@ public class StartUI {
                 this.createItem();
             } else if (SHOWALL.equals(answer)) {
                 this.showAll();
-            }else if (EDIT.equals(answer)){
+            } else if (EDIT.equals(answer)) {
                 this.edit();
-            }else if (DELETE.equals(answer)){
+            } else if (DELETE.equals(answer)) {
                 this.delete();
-            }else if (ID.equals(answer)){
+            } else if (ID.equals(answer)) {
                 this.findById();
-            }else if (NAME.equals(answer)){
+            } else if (NAME.equals(answer)) {
                 this.findByName();
-            }else if (EXIT.equals(answer)) {
+            } else if (EXIT.equals(answer)) {
                 exit = true;
             }
         }
@@ -58,9 +58,9 @@ public class StartUI {
     private void showAll() {
         System.out.println("------------ Список заявок ------------");
         Item[] all = this.tracker.findAll();
-        if (all[0] == null){
+        if (all[0] == null) {
             System.out.println("Список заявок пуст");
-        }else {
+        } else {
             for (Item item : all) {
                 showItem(item);
             }
@@ -88,7 +88,7 @@ public class StartUI {
         Item editable = this.tracker.findById(this.input.ask("Введите Id редактируемой заявки"));
         editable.setName(this.input.ask("Введите новое имя заявки"));
         editable.setDesc(this.input.ask("Введите новое описание заявки"));
-        this.tracker.replace(editable.getId(),editable);
+        this.tracker.replace(editable.getId(), editable);
         System.out.println("Заявка отредактированна");
         System.out.println();
     }
@@ -119,9 +119,9 @@ public class StartUI {
     private void findByName() {
         System.out.println("------------ Поиск заявок по имени ------------");
         Item[] wanted = this.tracker.findByName(this.input.ask("Введите имя заявок"));
-        if (wanted.length == 0 ) {
+        if (wanted.length == 0) {
             System.out.println("Заявки не найдены");
-        }else {
+        } else {
             System.out.println("Заявки: ");
             for (Item item : wanted) {
                 showItem(item);
@@ -141,7 +141,7 @@ public class StartUI {
         System.out.println("6. Выход из приложения");
     }
 
-    private void showItem (Item item) {
+    private void showItem(Item item) {
         System.out.println("Имя заявки: " + item.getName() + "   Описание: " + item.getDesc() + "  ID " + item.getId());
     }
 

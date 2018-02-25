@@ -11,7 +11,7 @@ import java.util.Random;
 public class Tracker {
     private final Item[] items = new Item[100];
     private int position = 0;
-    private static final Random random = new Random();
+    private static final Random RANDOM = new Random();
     /**
      * Метод добавления заявок.
      * @return Item.
@@ -34,10 +34,10 @@ public class Tracker {
      * @param id
      */
     public void delete(String id) {
-        for (int i = 0; i < this.items.length; i++){
+        for (int i = 0; i < this.items.length; i++) {
             if (this.items[i].getId().equals(id)) {
-                System.arraycopy(this.items,i+1,this.items,i,this.items.length - i -1);
-                this.items[items.length-1] = null;
+                System.arraycopy(this.items, i + 1, this.items, i, this.items.length - i - 1);
+                this.items[items.length - 1] = null;
                 this.position--;
                 break;
             }
@@ -49,10 +49,10 @@ public class Tracker {
      */
     public Item[] findAll() {
         Item[] output = this.items;
-        for (int i=0; i < this.items.length; i++) {
+        for (int i = 0; i < this.items.length; i++) {
             if (this.items[i] == null) {
                 output = new Item[i];
-                System.arraycopy(this.items,0,output, 0,output.length);
+                System.arraycopy(this.items, 0, output, 0, output.length);
                 break;
             }
         }
@@ -76,7 +76,7 @@ public class Tracker {
             }
         }
         Item[] output = new Item[position];
-        System.arraycopy(temp,0,output,0,output.length);
+        System.arraycopy(temp, 0, output, 0, output.length);
         return output;
     }
     /**
@@ -84,7 +84,7 @@ public class Tracker {
      * @return Уникальный ключ.
      */
     private String generateId() {
-        return String.valueOf(random.nextInt(1000000)) + LocalDateTime.now();
+        return String.valueOf(RANDOM.nextInt(1000000)) + LocalDateTime.now();
     }
     /**
      * Метод находит Item по id
