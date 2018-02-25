@@ -84,7 +84,7 @@ public class Tracker {
      * @return Уникальный ключ.
      */
     private String generateId() {
-        return String.valueOf(random.nextInt(10)) + LocalDateTime.now();
+        return String.valueOf(random.nextInt(1000000)) + LocalDateTime.now();
     }
     /**
      * Метод находит Item по id

@@ -12,6 +12,12 @@ public class Item {
     Item() {
     }
 
+    Item(String name, String desc) {
+        this.name = name;
+        this.desc = desc;
+        setCreated();
+    }
+
     Item(String name, String desc, String created) {
         this.name = name;
         this.desc = desc;

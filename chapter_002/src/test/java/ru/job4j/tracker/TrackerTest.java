@@ -60,6 +60,16 @@ public class TrackerTest {
         assertThat(tracker.findByName("test1").length,is(2));
         assertThat(tracker.findAll().length,is(3));
         assertThat(tracker.findByName("test1")[0].getName(),is("test1"));
+    }
 
+    @Test
+    public void findByNameTestEmpty() {Tracker tracker = new Tracker();
+        Item item = new Item("test1","testDescription","111");
+        tracker.add(item);
+        Item item2 = new Item("test1","testDescription","111");
+        tracker.add(item2);
+        Item item3 = new Item("test2","testDescription","111");
+        tracker.add(item3);
+        assertThat(tracker.findByName("test3").length,is(0));
     }
 }
