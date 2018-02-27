@@ -14,7 +14,6 @@ import static org.junit.Assert.assertThat;
 public class StartUITest {
 
     private String menuStr = new StringBuilder()
-            .append("----------- Меню -----------") .append(System.lineSeparator())
             .append("0. Добавление новой заявки") .append(System.lineSeparator())
             .append("1. Вывести список всех заявок") .append(System.lineSeparator())
             .append("2. Редактирование заявки") .append(System.lineSeparator())
