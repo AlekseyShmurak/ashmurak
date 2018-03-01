@@ -8,6 +8,7 @@ public class StartUI {
 
     private final Input input; //Получение данных от пользователя.
     private final Tracker tracker; //Хранилище заявок.
+    private int[] rage;
 
     /**
      * Конструтор инициализирующий поля.
@@ -25,9 +26,13 @@ public class StartUI {
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions();
+        rage = new int[menu.getNumberOfActions()];
+        for (int i = 0; i < rage.length; i++) {
+            rage[i] = i;
+        }
         do {
             menu.show();
-            menu.select(Integer.valueOf(this.input.ask("Выберите пункт меню")));
+            menu.select(this.input.ask("Выберите пункт меню", rage));
 
         } while (!menu.toExit());
     }
@@ -37,6 +42,6 @@ public class StartUI {
      * @param args
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }

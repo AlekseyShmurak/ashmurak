@@ -44,6 +44,10 @@ public class MenuTracker {
         return exit;
     }
 
+    public int getNumberOfActions() {
+        return this.actions.length + 1;
+    }
+
     private static class CreateItem implements UserAction {
         @Override
         public int key() {
