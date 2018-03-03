@@ -13,15 +13,14 @@ import static org.junit.Assert.assertThat;
 
 public class StartUITest {
 
-    private String menuStr = new StringBuilder()
-            .append("0. Добавление новой заявки") .append(System.lineSeparator())
-            .append("1. Вывести список всех заявок") .append(System.lineSeparator())
-            .append("2. Редактирование заявки") .append(System.lineSeparator())
-            .append("3. Удаление заявки.") .append(System.lineSeparator())
-            .append("4. Поиск заявки по ID.") .append(System.lineSeparator())
-            .append("5. Вывести список звявок по имени").append(System.lineSeparator())
-            .append("6. Выход из приложения").append(System.lineSeparator())
-            .toString();
+    private String menuStr = String.format("0. Добавление новой заявки%n" +
+            "1. Вывести список всех заявок%n" +
+            "2. Редактирование заявки%n" +
+            "3. Удаление заявки.%n" +
+            "4. Поиск заявки по ID.%n" +
+            "5. Вывести список звявок по имени%n" +
+            "6. Выход из приложения%n");
+
 
     // поле содержит дефолтный вывод в консоль.
     private final PrintStream stdout = System.out;
@@ -88,12 +87,10 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"1", "6"});
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()),is(menuStr +
-                        new StringBuilder()
-                                .append("------------ Список заявок ------------").append(System.lineSeparator())
-                                .append("Имя заявки: First   Описание: asdf  ID " + tracker.getAll()[0].getId()).append(System.lineSeparator())
-                                .append("Имя заявки: Second   Описание: asdf  ID " + tracker.getAll()[1].getId()).append(System.lineSeparator())
-                                .append(" ").append(System.lineSeparator()).toString() +
-                                menuStr));
+                        String.format("------------ Список заявок ------------%n" +
+                                "Имя заявки: First   Описание: asdf  ID %s" +
+                                "%nИмя заявки: Second   Описание: asdf  ID %s" +
+                                "%n %n" + menuStr, tracker.getAll()[0].getId(), tracker.getAll()[1].getId())));
     }
 
     @Test
@@ -104,13 +101,10 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"5", "First", "6"});
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()),is(menuStr +
-                new StringBuilder()
-                        .append("------------ Поиск заявок по имени ------------").append(System.lineSeparator())
-                        .append("Заявки: ").append(System.lineSeparator())
-                        .append("Имя заявки: First   Описание: asdf  ID " + tracker.findByName("First")[0].getId()).append(System.lineSeparator())
-                        .append("Имя заявки: First   Описание: qwert  ID " + tracker.findByName("First")[1].getId()).append(System.lineSeparator())
-                        .append(System.lineSeparator()).toString() +
-                menuStr));
+                String.format("------------ Поиск заявок по имени ------------%nЗаявки: %n" +
+                        "Имя заявки: First   Описание: asdf  ID %s" +
+                        "%nИмя заявки: First   Описание: qwert  ID %s%n%n" +
+                        menuStr, tracker.findByName("First")[0].getId(),tracker.findByName("First")[1].getId())));
     }
 
     @Test
@@ -120,11 +114,9 @@ public class StartUITest {
         Input input = new StubInput(new String[]{"4", tracker.getAll()[0].getId(), "6"});
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()),is(menuStr +
-                new StringBuilder()
-                        .append("------------ Поиск заявки по Id ------------").append(System.lineSeparator())
-                        .append("Имя заявки: First   Описание: asdf  ID " + tracker.getAll()[0].getId()).append(System.lineSeparator())
-                        .append(System.lineSeparator()).toString() +
-                menuStr));
+                String.format("------------ Поиск заявки по Id ------------%n" +
+                        "Имя заявки: First   Описание: asdf  ID %s%n%n" +
+                        menuStr, tracker.getAll()[0].getId())));
     }
 
 
