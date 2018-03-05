@@ -76,7 +76,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"6"});
         new StartUI(input, tracker).init();
-        assertThat(new String(out.toByteArray()),is(menuStr));
+        assertThat(out.toString(),is(menuStr));
     }
 
     @Test
@@ -86,7 +86,7 @@ public class StartUITest {
         tracker.add(new Item("Second", "asdf"));
         Input input = new StubInput(new String[]{"1", "6"});
         new StartUI(input, tracker).init();
-        assertThat(new String(out.toByteArray()),is(menuStr +
+        assertThat(out.toString(),is(menuStr +
                         String.format("------------ Список заявок ------------%n" +
                                 "Имя заявки: First   Описание: asdf  ID %s" +
                                 "%nИмя заявки: Second   Описание: asdf  ID %s" +
@@ -100,7 +100,7 @@ public class StartUITest {
         tracker.add(new Item("First", "qwert"));
         Input input = new StubInput(new String[]{"5", "First", "6"});
         new StartUI(input, tracker).init();
-        assertThat(new String(out.toByteArray()),is(menuStr +
+        assertThat(out.toString(),is(menuStr +
                 String.format("------------ Поиск заявок по имени ------------%nЗаявки: %n" +
                         "Имя заявки: First   Описание: asdf  ID %s" +
                         "%nИмя заявки: First   Описание: qwert  ID %s%n%n" +
@@ -113,7 +113,7 @@ public class StartUITest {
         tracker.add(new Item("First", "asdf"));
         Input input = new StubInput(new String[]{"4", tracker.getAll()[0].getId(), "6"});
         new StartUI(input, tracker).init();
-        assertThat(new String(out.toByteArray()),is(menuStr +
+        assertThat(out.toString(),is(menuStr +
                 String.format("------------ Поиск заявки по Id ------------%n" +
                         "Имя заявки: First   Описание: asdf  ID %s%n%n" +
                         menuStr, tracker.getAll()[0].getId())));
