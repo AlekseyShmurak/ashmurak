@@ -42,7 +42,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();     // создаём Tracker
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});   //создаём StubInput с последовательностью действий
         new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
-        assertThat(tracker.getAll()[0].getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
+        assertThat(tracker.getAll().get(0).getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
 
 
@@ -65,10 +65,10 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         tracker.add(new Item("First", "asdf"));
         tracker.add(new Item("Second", "asdf"));
-        Input input = new StubInput(new String[]{"3",tracker.findAll()[0].getId(), "6"});
+        Input input = new StubInput(new String[]{"3",tracker.findAll().get(0).getId(), "6"});
         new StartUI(input, tracker).init();
-        assertThat(1, is(tracker.findAll().length));
-        assertThat("Second", is(tracker.findAll()[0].getName()));
+        assertThat(1, is(tracker.findAll().size()));
+        assertThat("Second", is(tracker.findAll().get(0).getName()));
     }
 
     @Test
@@ -90,7 +90,7 @@ public class StartUITest {
                         String.format("------------ Список заявок ------------%n" +
                                 "Имя заявки: First   Описание: asdf  ID %s" +
                                 "%nИмя заявки: Second   Описание: asdf  ID %s" +
-                                "%n %n" + menuStr, tracker.getAll()[0].getId(), tracker.getAll()[1].getId())));
+                                "%n %n" + menuStr, tracker.getAll().get(0).getId(), tracker.getAll().get(1).getId())));
     }
 
     @Test
@@ -104,19 +104,19 @@ public class StartUITest {
                 String.format("------------ Поиск заявок по имени ------------%nЗаявки: %n" +
                         "Имя заявки: First   Описание: asdf  ID %s" +
                         "%nИмя заявки: First   Описание: qwert  ID %s%n%n" +
-                        menuStr, tracker.findByName("First")[0].getId(),tracker.findByName("First")[1].getId())));
+                        menuStr, tracker.findByName("First").get(0).getId(),tracker.findByName("First").get(1).getId())));
     }
 
     @Test
     public void findByIdTest() {
         Tracker tracker = new Tracker();
         tracker.add(new Item("First", "asdf"));
-        Input input = new StubInput(new String[]{"4", tracker.getAll()[0].getId(), "6"});
+        Input input = new StubInput(new String[]{"4", tracker.getAll().get(0).getId(), "6"});
         new StartUI(input, tracker).init();
         assertThat(out.toString(),is(menuStr +
                 String.format("------------ Поиск заявки по Id ------------%n" +
                         "Имя заявки: First   Описание: asdf  ID %s%n%n" +
-                        menuStr, tracker.getAll()[0].getId())));
+                        menuStr, tracker.getAll().get(0).getId())));
     }
 
 

@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -9,8 +11,7 @@ import java.util.Random;
  * @since 0.1
  */
 public class Tracker {
-    private final Item[] items = new Item[100];
-    private int position = 0;
+    private List<Item> items = new ArrayList<>();
     private static final Random RANDOM = new Random();
     /**
      * Метод добавления заявок.
@@ -18,7 +19,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(item);
         return item;
     }
     /**
@@ -27,18 +28,16 @@ public class Tracker {
      * @param item
      */
     public void replace(String id, Item item) {
-       this.items[findIndexById(id)] = item;
+       this.items.set(this.findIndexById(id), item);
     }
     /**
      * Метод удаления заявки
      * @param id
      */
     public void delete(String id) {
-        for (int i = 0; i < this.items.length; i++) {
-            if (this.items[i].getId().equals(id)) {
-                System.arraycopy(this.items, i + 1, this.items, i, this.items.length - i - 1);
-                this.items[items.length - 1] = null;
-                this.position--;
+        for (Item item : this.items) {
+            if (item.getId().equals(id)) {
+                this.items.remove(item);
                 break;
             }
         }
@@ -47,36 +46,21 @@ public class Tracker {
      * Метод возвращает все заявки
      * @return
      */
-    public Item[] findAll() {
-        Item[] output = this.items;
-        for (int i = 0; i < this.items.length; i++) {
-            if (this.items[i] == null) {
-                output = new Item[i];
-                System.arraycopy(this.items, 0, output, 0, output.length);
-                break;
-            }
-        }
-        return output;
+    public List<Item> findAll() {
+        return this.items;
     }
     /**
      * Метод возвращает все заявки по имени
      * @param key
      * @return
      */
-    public Item[] findByName(String key) {
-        Item[] temp = new Item[this.items.length];
-        int position = 0;
-        for (int i = 0; i < this.items.length; i++) {
-            if (this.items[i] == null) {
-                break;
-            }
-            if (this.items[i].getName().equals(key)) {
-                temp[position] = this.items[i];
-                position++;
+    public List<Item> findByName(String key) {
+        List<Item> output = new ArrayList<>();
+        for (Item item : this.items) {
+            if (item.getName().equals(key)) {
+                output.add(item);
             }
         }
-        Item[] output = new Item[position];
-        System.arraycopy(temp, 0, output, 0, output.length);
         return output;
     }
     /**
@@ -103,9 +87,9 @@ public class Tracker {
     }
 
     private int findIndexById(String id) {
-        int index = this.items.length;
-        for (int i = 0; i < this.items.length; i++) {
-            if (id.equals(this.items[i].getId())) {
+        int index = this.items.size();
+        for (int i = 0; i < this.items.size(); i++) {
+            if (id.equals(this.items.get(i).getId())) {
                 index = i;
                 break;
             }
@@ -113,7 +97,7 @@ public class Tracker {
         return index;
     }
 
-    public Item[] getAll() {
+    public List<Item> getAll() {
         return this.items;
     }
 

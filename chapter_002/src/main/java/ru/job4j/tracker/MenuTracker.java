@@ -1,10 +1,13 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MenuTracker {
 
     private Input input;
     private Tracker tracker;
-    private  UserAction[] actions = new UserAction[6];
+    private  List<UserAction> actions = new ArrayList<>();
     private boolean exit = false;
 
     public MenuTracker(Input input, Tracker tracker) {
@@ -13,19 +16,19 @@ public class MenuTracker {
     }
 
     public void fillActions() {
-        this.actions[0] = new CreateItem(0, "Добавление новой заявки");
-        this.actions[1] = new ShowAll(1, "Вывести список всех заявок");
-        this.actions[2] = new Edit(2, "Редактирование заявки");
-        this.actions[3] = new Delete(3, "Удаление заявки.");
-        this.actions[4] = new FindById(4, "Поиск заявки по ID.");
-        this.actions[5] = new FindByName(5, "Вывести список звявок по имени");
+        this.actions.add(new CreateItem(0, "Добавление новой заявки"));
+        this.actions.add(new ShowAll(1, "Вывести список всех заявок"));
+        this.actions.add(new Edit(2, "Редактирование заявки"));
+        this.actions.add(new Delete(3, "Удаление заявки."));
+        this.actions.add(new FindById(4, "Поиск заявки по ID."));
+        this.actions.add(new FindByName(5, "Вывести список звявок по имени"));
     }
 
     public void select(int key) {
         if (key == 6){
             this.exit = true;
         }else {
-            this.actions[key].execute(this.input, this.tracker);
+            this.actions.get(key).execute(this.input, this.tracker);
         }
     }
 
@@ -45,7 +48,7 @@ public class MenuTracker {
     }
 
     public int getNumberOfActions() {
-        return this.actions.length + 1;
+        return this.actions.size() + 1;
     }
 
     private static class CreateItem extends BaseAction {
@@ -88,11 +91,10 @@ public class MenuTracker {
          @Override
          public void execute(Input input, Tracker tracker) {
              System.out.println("------------ Список заявок ------------");
-             Item[] all = tracker.findAll();
-             if (all[0] == null) {
+             if (tracker.getAll().size() == 0) {
              System.out.println("Список заявок пуст");
              } else {
-                 for (Item item : all) {
+                 for (Item item : tracker.getAll()) {
                  showItem(item);
                  }
              }
@@ -120,8 +122,8 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
              System.out.println("------------ Поиск заявок по имени ------------");
-             Item[] wanted = tracker.findByName(input.ask("Введите имя заявок"));
-             if (wanted.length == 0) {
+             List<Item> wanted = tracker.findByName(input.ask("Введите имя заявок"));
+             if (wanted.size() == 0) {
                  System.out.println("Заявки не найдены");
              }else {
                  System.out.println("Заявки: ");
