@@ -28,4 +28,17 @@ public class ConvertListTest {
         assertThat(expect, is(ConvertList.toArray(ConvertList.toList(input), 3)));
     }
 
+    @Test
+    public void convertTest() {
+        List<int[]> list = new ArrayList<>();
+        list.add(new int[]{1, 2});
+        list.add(new int[]{3, 4, 5, 6});
+        List<Integer> expect = new ArrayList<>();
+        for (int i = 1; i < 7; i++){
+            expect.add(i);
+        }
+
+        assertThat(expect, is(ConvertList.convert(list)));
+    }
+
 }

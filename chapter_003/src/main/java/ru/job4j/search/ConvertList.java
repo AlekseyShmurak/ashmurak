@@ -28,6 +28,16 @@ public class ConvertList {
         }
         return output;
     }
+
+    public static List<Integer> convert (List<int[]> list) {
+        List<Integer> output = new ArrayList<>();
+        for(int[] array : list) {
+            for (int value : array) {
+                output.add(value);
+            }
+        }
+        return output;
+    }
 }
 
 
