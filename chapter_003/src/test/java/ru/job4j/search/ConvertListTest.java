@@ -14,22 +14,25 @@ public class ConvertListTest {
 
     @Test
     public void toListTest() {
+        ConvertList convertList = new ConvertList();
         int[][] input = {{1, 2, 3}, {3, 4, 5}};
-        List<Integer> output = ConvertList.toList(input);
+        List<Integer> output = convertList.toList(input);
         Integer[] expect = {1, 2, 3, 3, 4, 5};
         assertThat(expect, is(output.toArray()));
     }
 
     @Test
     public void toArrayTest() {
+        ConvertList convertList = new ConvertList();
         int[][] expect = {{1, 2, 3}, {3, 4, 5}, {6, 0, 0}};
         int[][] input = {{1, 2, 3, 3, 4, 5, 6}};
 
-        assertThat(expect, is(ConvertList.toArray(ConvertList.toList(input), 3)));
+        assertThat(expect, is(convertList.toArray(convertList.toList(input), 3)));
     }
 
     @Test
     public void convertTest() {
+        ConvertList convertList = new ConvertList();
         List<int[]> list = new ArrayList<>();
         list.add(new int[]{1, 2});
         list.add(new int[]{3, 4, 5, 6});
@@ -38,7 +41,7 @@ public class ConvertListTest {
             expect.add(i);
         }
 
-        assertThat(expect, is(ConvertList.convert(list)));
+        assertThat(expect, is(convertList.convert(list)));
     }
 
 }
