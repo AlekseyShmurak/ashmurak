@@ -5,6 +5,8 @@ sudo: false
 
 # после выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
 # Здесь используется сторонни сервис https://codecov.io/
+script: "mvn cobertura:cobertura"
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
