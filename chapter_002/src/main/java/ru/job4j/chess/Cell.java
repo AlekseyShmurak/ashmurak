@@ -4,7 +4,7 @@ public class Cell {
     private int x;
     private int y;
 
-    public Cell( int x, int y) {
+    public Cell(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -16,11 +16,7 @@ public class Cell {
         return y;
     }
 
-    public boolean eql (Cell cell) {
-        if (this.getY() == cell.getY() && this.getX() == cell.getX()) {
-            return true;
-        } else {
-            return false;
-        }
+    public boolean eql(Cell cell) {
+        return this.getY() == cell.getY() && this.getX() == cell.getX() ? true : false;
     }
 }

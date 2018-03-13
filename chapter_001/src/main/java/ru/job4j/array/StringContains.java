@@ -6,10 +6,10 @@ public class StringContains {
         char[] originAr = origin.toCharArray();
         char[] subAr = sub.toCharArray();
         boolean result = false;
-        for (int i=0; i < originAr.length - subAr.length+1; i++){
+        for (int i = 0; i < originAr.length - subAr.length + 1; i++) {
             result = true;
-            for (int j=0; j < subAr.length;j++) {
-                if (originAr[i+j] != subAr[j]) {
+            for (int j = 0; j < subAr.length; j++) {
+                if (originAr[i + j] != subAr[j]) {
                     result = false;
                     break;
                 }
@@ -17,6 +17,6 @@ public class StringContains {
             if (result) {
                 break;
             }
-        }return result;
+        } return result;
     }
 }

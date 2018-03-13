@@ -20,7 +20,7 @@ public class PriorityQueue {
                 break;
             }
         }
-        if(!isAdded) {
+        if (!isAdded) {
             this.tasks.addLast(task);
         }
 

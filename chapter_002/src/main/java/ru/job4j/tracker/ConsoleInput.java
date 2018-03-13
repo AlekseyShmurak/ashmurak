@@ -17,7 +17,7 @@ public class ConsoleInput implements Input {
         int key = Integer.valueOf(ask(question));
         boolean exist = false;
         for (int value : rage) {
-            if(value == key) {
+            if (value == key) {
                 exist = true;
                 break;
             }
@@ -25,7 +25,7 @@ public class ConsoleInput implements Input {
         if (exist) {
             return key;
         } else {
-            throw new MenuOutException("Ошибка") ;
+            throw new MenuOutException("Ошибка");
         }
     }
 }

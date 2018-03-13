@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 public class SortUserTest {
 
     @Test
-    public void Test() {
+    public void sortTest() {
         List<User> input = new ArrayList<>();
         input.add(new User("Vasia", 5));
         input.add(new User("Petia", 12));

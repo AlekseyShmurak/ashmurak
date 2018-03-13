@@ -9,7 +9,7 @@ public class FactorialTest {
     @Test
     public void calcTest() {
         Factorial fact = new Factorial();
-        assertThat(120,is(fact.calc(5)));
+        assertThat(120, is(fact.calc(5)));
     }
 
 }

@@ -8,12 +8,12 @@ import java.util.TreeSet;
 
 public class SortUser {
 
-    public Set<User> sort (List<User> users){
+    public Set<User> sort(List<User> users) {
         Set<User> output = new TreeSet<User>(users);
         return output;
     }
 
-    public List<User> sortNameLength (List<User> users){
+    public List<User> sortNameLength(List<User> users) {
         users.sort(new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
@@ -23,7 +23,7 @@ public class SortUser {
        return  users;
     }
 
-    public List<User> sortByAllFields (List<User> users) {
+    public List<User> sortByAllFields(List<User> users) {
         users.sort(new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {

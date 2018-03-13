@@ -10,8 +10,8 @@ public class FindLoopTest {
     @Test
     public void indexOfTest() {
         FindLoop floop = new FindLoop();
-        int[] array = {2,9,15,20};
-        assertThat(2,is(floop.indexOf(array,15)));
-        assertThat(-1,is(floop.indexOf(array,25)));
+        int[] array = {2, 9, 15, 20};
+        assertThat(2, is(floop.indexOf(array, 15)));
+        assertThat(-1, is(floop.indexOf(array, 25)));
     }
 }

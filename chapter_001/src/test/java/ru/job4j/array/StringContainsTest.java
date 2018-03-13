@@ -10,15 +10,15 @@ public class StringContainsTest {
     @Test
     public void containsTestTrue() {
         StringContains test = new StringContains();
-        assertThat(true,is(test.contains("qwerty","q")));
-        assertThat(true,is(test.contains("qwerty","y")));
-        assertThat(true,is(test.contains("qwerty","rty")));
+        assertThat(true, is(test.contains("qwerty", "q")));
+        assertThat(true, is(test.contains("qwerty", "y")));
+        assertThat(true, is(test.contains("qwerty", "rty")));
 
     }
 
     @Test
     public void containsTestFalse() {
         StringContains test = new StringContains();
-        assertThat(false,is(test.contains("qwerty","eert")));
+        assertThat(false, is(test.contains("qwerty", "eert")));
     }
 }

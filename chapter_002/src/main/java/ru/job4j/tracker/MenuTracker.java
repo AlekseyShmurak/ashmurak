@@ -25,9 +25,9 @@ public class MenuTracker {
     }
 
     public void select(int key) {
-        if (key == 6){
+        if (key == 6) {
             this.exit = true;
-        }else {
+        } else {
             this.actions.get(key).execute(this.input, this.tracker);
         }
     }
@@ -68,7 +68,7 @@ public class MenuTracker {
     private class Edit extends BaseAction {
 
         public Edit(int key, String name) {
-            super(key,name);
+            super(key, name);
         }
 
         @Override
@@ -84,8 +84,8 @@ public class MenuTracker {
     }
     private class ShowAll extends BaseAction {
 
-        public ShowAll( int key, String name) {
-            super(key,name);
+        public ShowAll(int key, String name) {
+            super(key, name);
         }
 
          @Override
@@ -103,7 +103,7 @@ public class MenuTracker {
      }
     private class FindById extends BaseAction {
 
-        public FindById( int key, String name) {
+        public FindById(int key, String name) {
             super(key, name);
         }
         @Override
@@ -116,7 +116,7 @@ public class MenuTracker {
      }
     private class FindByName extends BaseAction {
 
-        public FindByName( int key, String name) {
+        public FindByName(int key, String name) {
             super(key, name);
         }
         @Override
@@ -125,7 +125,7 @@ public class MenuTracker {
              List<Item> wanted = tracker.findByName(input.ask("Введите имя заявок"));
              if (wanted.size() == 0) {
                  System.out.println("Заявки не найдены");
-             }else {
+             } else {
                  System.out.println("Заявки: ");
                  for (Item item : wanted) {
                      showItem(item);
@@ -137,7 +137,7 @@ public class MenuTracker {
 }
 class Delete extends BaseAction {
 
-    public Delete( int key, String name) {
+    public Delete(int key, String name) {
         super(key, name);
     }
     @Override

@@ -13,13 +13,13 @@ import static org.junit.Assert.assertThat;
 
 public class StartUITest {
 
-    private String menuStr = String.format("0. Добавление новой заявки%n" +
-            "1. Вывести список всех заявок%n" +
-            "2. Редактирование заявки%n" +
-            "3. Удаление заявки.%n" +
-            "4. Поиск заявки по ID.%n" +
-            "5. Вывести список звявок по имени%n" +
-            "6. Выход из приложения%n");
+    private String menuStr = String.format("0. Добавление новой заявки%n"
+            + "1. Вывести список всех заявок%n"
+            + "2. Редактирование заявки%n"
+            + "3. Удаление заявки.%n"
+            + "4. Поиск заявки по ID.%n"
+            + "5. Вывести список звявок по имени%n"
+            + "6. Выход из приложения%n");
 
 
     // поле содержит дефолтный вывод в консоль.
@@ -65,7 +65,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         tracker.add(new Item("First", "asdf"));
         tracker.add(new Item("Second", "asdf"));
-        Input input = new StubInput(new String[]{"3",tracker.findAll().get(0).getId(), "6"});
+        Input input = new StubInput(new String[]{"3", tracker.findAll().get(0).getId(), "6"});
         new StartUI(input, tracker).init();
         assertThat(1, is(tracker.findAll().size()));
         assertThat("Second", is(tracker.findAll().get(0).getName()));
@@ -76,7 +76,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"6"});
         new StartUI(input, tracker).init();
-        assertThat(out.toString(),is(menuStr));
+        assertThat(out.toString(), is(menuStr));
     }
 
     @Test
@@ -86,11 +86,11 @@ public class StartUITest {
         tracker.add(new Item("Second", "asdf"));
         Input input = new StubInput(new String[]{"1", "6"});
         new StartUI(input, tracker).init();
-        assertThat(out.toString(),is(menuStr +
-                        String.format("------------ Список заявок ------------%n" +
-                                "Имя заявки: First   Описание: asdf  ID %s" +
-                                "%nИмя заявки: Second   Описание: asdf  ID %s" +
-                                "%n %n" + menuStr, tracker.getAll().get(0).getId(), tracker.getAll().get(1).getId())));
+        assertThat(out.toString(), is(menuStr
+                + String.format("------------ Список заявок ------------%n"
+                + "Имя заявки: First   Описание: asdf  ID %s"
+                + "%nИмя заявки: Second   Описание: asdf  ID %s"
+                + "%n %n" + menuStr, tracker.getAll().get(0).getId(), tracker.getAll().get(1).getId())));
     }
 
     @Test
@@ -100,11 +100,11 @@ public class StartUITest {
         tracker.add(new Item("First", "qwert"));
         Input input = new StubInput(new String[]{"5", "First", "6"});
         new StartUI(input, tracker).init();
-        assertThat(out.toString(),is(menuStr +
-                String.format("------------ Поиск заявок по имени ------------%nЗаявки: %n" +
-                        "Имя заявки: First   Описание: asdf  ID %s" +
-                        "%nИмя заявки: First   Описание: qwert  ID %s%n%n" +
-                        menuStr, tracker.findByName("First").get(0).getId(),tracker.findByName("First").get(1).getId())));
+        assertThat(out.toString(), is(menuStr
+                + String.format("------------ Поиск заявок по имени ------------%nЗаявки: %n"
+                + "Имя заявки: First   Описание: asdf  ID %s"
+                + "%nИмя заявки: First   Описание: qwert  ID %s%n%n"
+                + menuStr, tracker.findByName("First").get(0).getId(), tracker.findByName("First").get(1).getId())));
     }
 
     @Test
@@ -113,10 +113,10 @@ public class StartUITest {
         tracker.add(new Item("First", "asdf"));
         Input input = new StubInput(new String[]{"4", tracker.getAll().get(0).getId(), "6"});
         new StartUI(input, tracker).init();
-        assertThat(out.toString(),is(menuStr +
-                String.format("------------ Поиск заявки по Id ------------%n" +
-                        "Имя заявки: First   Описание: asdf  ID %s%n%n" +
-                        menuStr, tracker.getAll().get(0).getId())));
+        assertThat(out.toString(), is(menuStr
+                + String.format("------------ Поиск заявки по Id ------------%n"
+                + "Имя заявки: First   Описание: asdf  ID %s%n%n"
+                + menuStr, tracker.getAll().get(0).getId())));
     }
 
 

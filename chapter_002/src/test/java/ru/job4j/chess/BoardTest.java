@@ -34,7 +34,7 @@ public class BoardTest {
         Board board = new Board();
         board.add(new Bishop(new Cell(3, 3)));
         try {
-            board.move(new Cell(2, 2), new Cell(2,4));
+            board.move(new Cell(2, 2), new Cell(2, 4));
         } catch (ImposibleMoveException e) {
             System.out.println("Фигура так не ходит");
         } catch (FigureNotFoundException e) {
@@ -42,7 +42,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("Поле пустое\r\n")));
+        assertThat(this.mem.toString(), is(String.format("Поле пустое\r\n")));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class BoardTest {
         Board board = new Board();
         board.add(new Bishop(new Cell(3, 3)));
         try {
-            board.move(new Cell(3, 3), new Cell(6,5));
+            board.move(new Cell(3, 3), new Cell(6, 5));
         } catch (ImposibleMoveException e) {
             System.out.println("Фигура так не ходит");
         } catch (FigureNotFoundException e) {
@@ -58,7 +58,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("Фигура так не ходит\r\n")));
+        assertThat(this.mem.toString(), is(String.format("Фигура так не ходит\r\n")));
     }
 
     @Test
@@ -67,7 +67,7 @@ public class BoardTest {
         board.add(new Bishop(new Cell(1, 1)));
         board.add(new Bishop(new Cell(4, 4)));
         try {
-            board.move(new Cell(1, 1), new Cell(8,8));
+            board.move(new Cell(1, 1), new Cell(8, 8));
         } catch (ImposibleMoveException e) {
             System.out.println("Фигура так не ходит");
         } catch (FigureNotFoundException e) {
@@ -75,7 +75,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("На пути стоит другая фигура\r\n")));
+        assertThat(this.mem.toString(), is(String.format("На пути стоит другая фигура\r\n")));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class BoardTest {
         Board board = new Board();
         board.add(new Bishop(new Cell(3, 3)));
         try {
-            board.move(new Cell(3, 3), new Cell(6,6));
+            board.move(new Cell(3, 3), new Cell(6, 6));
             board.move(new Cell(6, 6), new Cell(4, 8));
             board.move(new Cell(4, 8), new Cell(1, 5));
         } catch (ImposibleMoveException e) {
@@ -93,7 +93,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("")));
+        assertThat(this.mem.toString(), is(String.format("")));
     }
 
     @Test
@@ -101,7 +101,7 @@ public class BoardTest {
         Board board = new Board();
         board.add(new Rook(new Cell(3, 3)));
         try {
-            board.move(new Cell(3, 3), new Cell(6,5));
+            board.move(new Cell(3, 3), new Cell(6, 5));
         } catch (ImposibleMoveException e) {
             System.out.println("Фигура так не ходит");
         } catch (FigureNotFoundException e) {
@@ -109,7 +109,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("Фигура так не ходит\r\n")));
+        assertThat(this.mem.toString(), is(String.format("Фигура так не ходит\r\n")));
     }
 
     @Test
@@ -118,7 +118,7 @@ public class BoardTest {
         board.add(new Rook(new Cell(1, 1)));
         board.add(new Bishop(new Cell(1, 4)));
         try {
-            board.move(new Cell(1, 1), new Cell(1,6));
+            board.move(new Cell(1, 1), new Cell(1, 6));
         } catch (ImposibleMoveException e) {
             System.out.println("Фигура так не ходит");
         } catch (FigureNotFoundException e) {
@@ -126,7 +126,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("На пути стоит другая фигура\r\n")));
+        assertThat(this.mem.toString(), is(String.format("На пути стоит другая фигура\r\n")));
     }
 
     @Test
@@ -134,7 +134,7 @@ public class BoardTest {
         Board board = new Board();
         board.add(new Rook(new Cell(1, 1)));
         try {
-            board.move(new Cell(1, 1), new Cell(1,6));
+            board.move(new Cell(1, 1), new Cell(1, 6));
             board.move(new Cell(1, 6), new Cell(5, 6));
             board.move(new Cell(5, 6), new Cell(5, 3));
         } catch (ImposibleMoveException e) {
@@ -144,7 +144,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("")));
+        assertThat(this.mem.toString(), is(String.format("")));
     }
 
     @Test
@@ -152,7 +152,7 @@ public class BoardTest {
         Board board = new Board();
         board.add(new Queen(new Cell(3, 3)));
         try {
-            board.move(new Cell(3, 3), new Cell(6,5));
+            board.move(new Cell(3, 3), new Cell(6, 5));
         } catch (ImposibleMoveException e) {
             System.out.println("Фигура так не ходит");
         } catch (FigureNotFoundException e) {
@@ -160,7 +160,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("Фигура так не ходит\r\n")));
+        assertThat(this.mem.toString(), is(String.format("Фигура так не ходит\r\n")));
     }
 
     @Test
@@ -169,7 +169,7 @@ public class BoardTest {
         board.add(new Queen(new Cell(1, 1)));
         board.add(new Bishop(new Cell(1, 4)));
         try {
-            board.move(new Cell(1, 1), new Cell(1,6));
+            board.move(new Cell(1, 1), new Cell(1, 6));
         } catch (ImposibleMoveException e) {
             System.out.println("Фигура так не ходит");
         } catch (FigureNotFoundException e) {
@@ -177,7 +177,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("На пути стоит другая фигура\r\n")));
+        assertThat(this.mem.toString(), is(String.format("На пути стоит другая фигура\r\n")));
     }
 
     @Test
@@ -185,7 +185,7 @@ public class BoardTest {
         Board board = new Board();
         board.add(new Queen(new Cell(1, 1)));
         try {
-            board.move(new Cell(1, 1), new Cell(3,3));
+            board.move(new Cell(1, 1), new Cell(3, 3));
             board.move(new Cell(3, 3), new Cell(3, 1));
             board.move(new Cell(3, 1), new Cell(1, 3));
         } catch (ImposibleMoveException e) {
@@ -195,7 +195,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("")));
+        assertThat(this.mem.toString(), is(String.format("")));
     }
 
     @Test
@@ -203,7 +203,7 @@ public class BoardTest {
         Board board = new Board();
         board.add(new Knight(new Cell(3, 3)));
         try {
-            board.move(new Cell(3, 3), new Cell(6,5));
+            board.move(new Cell(3, 3), new Cell(6, 5));
         } catch (ImposibleMoveException e) {
             System.out.println("Фигура так не ходит");
         } catch (FigureNotFoundException e) {
@@ -211,7 +211,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("Фигура так не ходит\r\n")));
+        assertThat(this.mem.toString(), is(String.format("Фигура так не ходит\r\n")));
     }
 
     @Test
@@ -220,7 +220,7 @@ public class BoardTest {
         board.add(new Knight(new Cell(1, 1)));
         board.add(new Bishop(new Cell(2, 3)));
         try {
-            board.move(new Cell(1, 1), new Cell(2,3));
+            board.move(new Cell(1, 1), new Cell(2, 3));
         } catch (ImposibleMoveException e) {
             System.out.println("Фигура так не ходит");
         } catch (FigureNotFoundException e) {
@@ -228,7 +228,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("На пути стоит другая фигура\r\n")));
+        assertThat(this.mem.toString(), is(String.format("На пути стоит другая фигура\r\n")));
     }
 
     @Test
@@ -236,7 +236,7 @@ public class BoardTest {
         Board board = new Board();
         board.add(new Knight(new Cell(1, 1)));
         try {
-            board.move(new Cell(1, 1), new Cell(2,3));
+            board.move(new Cell(1, 1), new Cell(2, 3));
             board.move(new Cell(2, 3), new Cell(4, 4));
             board.move(new Cell(4, 4), new Cell(3, 2));
         } catch (ImposibleMoveException e) {
@@ -246,7 +246,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("")));
+        assertThat(this.mem.toString(), is(String.format("")));
     }
 
     @Test
@@ -254,7 +254,7 @@ public class BoardTest {
         Board board = new Board();
         board.add(new King(new Cell(3, 3)));
         try {
-            board.move(new Cell(3, 3), new Cell(6,5));
+            board.move(new Cell(3, 3), new Cell(6, 5));
         } catch (ImposibleMoveException e) {
             System.out.println("Фигура так не ходит");
         } catch (FigureNotFoundException e) {
@@ -262,7 +262,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("Фигура так не ходит\r\n")));
+        assertThat(this.mem.toString(), is(String.format("Фигура так не ходит\r\n")));
     }
 
     @Test
@@ -271,7 +271,7 @@ public class BoardTest {
         board.add(new King(new Cell(1, 1)));
         board.add(new Bishop(new Cell(2, 2)));
         try {
-            board.move(new Cell(1, 1), new Cell(2,2));
+            board.move(new Cell(1, 1), new Cell(2, 2));
         } catch (ImposibleMoveException e) {
             System.out.println("Фигура так не ходит");
         } catch (FigureNotFoundException e) {
@@ -279,7 +279,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("На пути стоит другая фигура\r\n")));
+        assertThat(this.mem.toString(), is(String.format("На пути стоит другая фигура\r\n")));
     }
 
     @Test
@@ -287,7 +287,7 @@ public class BoardTest {
         Board board = new Board();
         board.add(new King(new Cell(2, 2)));
         try {
-            board.move(new Cell(2, 2), new Cell(3,3));
+            board.move(new Cell(2, 2), new Cell(3, 3));
             board.move(new Cell(3, 3), new Cell(2, 3));
             board.move(new Cell(2, 3), new Cell(1, 4));
         } catch (ImposibleMoveException e) {
@@ -297,7 +297,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("")));
+        assertThat(this.mem.toString(), is(String.format("")));
     }
 
     @Test
@@ -305,7 +305,7 @@ public class BoardTest {
         Board board = new Board();
         board.add(new Pawn(new Cell(3, 3)));
         try {
-            board.move(new Cell(3, 3), new Cell(4,3));
+            board.move(new Cell(3, 3), new Cell(4, 3));
         } catch (ImposibleMoveException e) {
             System.out.println("Фигура так не ходит");
         } catch (FigureNotFoundException e) {
@@ -313,7 +313,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("Фигура так не ходит\r\n")));
+        assertThat(this.mem.toString(), is(String.format("Фигура так не ходит\r\n")));
     }
 
     @Test
@@ -322,7 +322,7 @@ public class BoardTest {
         board.add(new Pawn(new Cell(1, 1)));
         board.add(new Bishop(new Cell(1, 2)));
         try {
-            board.move(new Cell(1, 1), new Cell(1,2));
+            board.move(new Cell(1, 1), new Cell(1, 2));
         } catch (ImposibleMoveException e) {
             System.out.println("Фигура так не ходит");
         } catch (FigureNotFoundException e) {
@@ -330,7 +330,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("На пути стоит другая фигура\r\n")));
+        assertThat(this.mem.toString(), is(String.format("На пути стоит другая фигура\r\n")));
     }
 
     @Test
@@ -338,7 +338,7 @@ public class BoardTest {
         Board board = new Board();
         board.add(new Pawn(new Cell(2, 2)));
         try {
-            board.move(new Cell(2, 2), new Cell(2,3));
+            board.move(new Cell(2, 2), new Cell(2, 3));
             board.move(new Cell(2, 3), new Cell(2, 4));
             board.move(new Cell(2, 4), new Cell(2, 5));
         } catch (ImposibleMoveException e) {
@@ -348,7 +348,7 @@ public class BoardTest {
         } catch (OccupiedWayException e) {
             System.out.println("На пути стоит другая фигура");
         }
-        assertThat(this.mem.toString(),is(String.format("")));
+        assertThat(this.mem.toString(), is(String.format("")));
     }
 
 }

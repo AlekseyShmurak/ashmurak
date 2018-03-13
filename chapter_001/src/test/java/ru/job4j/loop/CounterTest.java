@@ -11,7 +11,7 @@ public class CounterTest {
     @Test
     public void addTest() {
         Counter counter = new Counter();
-        assertThat(24,is(counter.add(5,11)));
+        assertThat(24, is(counter.add(5, 11)));
     }
 
 }

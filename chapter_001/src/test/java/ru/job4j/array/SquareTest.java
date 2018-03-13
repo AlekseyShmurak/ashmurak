@@ -14,6 +14,6 @@ public class SquareTest {
         expect[1] = 4;
         expect[2] = 9;
         Square input = new Square();
-        assertThat(expect,is(input.calculate(3)));
+        assertThat(expect, is(input.calculate(3)));
     }
 }

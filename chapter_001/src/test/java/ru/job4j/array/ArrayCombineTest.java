@@ -12,6 +12,6 @@ public class ArrayCombineTest {
         int[] expect = {1, 2, 3, 3, 4, 5, 5, 6};
         int[] first = {1, 3, 4, 5};
         int[] second = {2, 3, 5, 6};
-        assertThat(expect,is(test.combineSortedArrays(first,second )));
+        assertThat(expect, is(test.combineSortedArrays(first, second)));
     }
 }

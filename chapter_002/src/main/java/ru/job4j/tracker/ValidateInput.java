@@ -14,14 +14,14 @@ public class ValidateInput implements Input {
 
     public int ask(String question, int[] rage) {
         boolean invalid = true;
-        int value = - 1;
-        do{
+        int value = -1;
+        do {
             try {
                 value = this.input.ask(question, rage);
                 invalid = false;
-            } catch ( NumberFormatException error) {
+            } catch (NumberFormatException error) {
                 System.out.println("Введены неверные данные");
-            } catch ( MenuOutException moe) {
+            } catch (MenuOutException moe) {
                 System.out.println("Введен не существующий пункт меню");
             }
         } while (invalid);
