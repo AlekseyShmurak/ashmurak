@@ -29,10 +29,8 @@ public class BankController {
     }
 
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
-        User srcUser = this.getUser(srcPassport);
-        User destUser = this.getUser(destPassport);
-        return this.repository.get(srcUser).get(this.repository.get(srcUser).indexOf(new Account(0.0, srcRequisite))).transferMoney(
-                this.repository.get(destUser).get(this.repository.get(destUser).indexOf(new Account(0.0, dstRequisite))), amount);
+        return getUserAccounts(srcPassport).get(getUserAccounts(srcPassport).indexOf(new Account(0.0, srcRequisite))).transferMoney(
+                getUserAccounts(destPassport).get(getUserAccounts(destPassport).indexOf(new Account(0.0, dstRequisite))), amount);
     }
 
     public User getUser(String passport) {
