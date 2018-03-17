@@ -12,6 +12,7 @@ public class CoffeeMachineTest {
         assertThat(new int[]{10, 10, 10, 10}, is(machine.changes(90, 50)));
         assertThat(new int[]{10, 10, 10, 10, 5}, is(machine.changes(90, 45)));
         assertThat(new int[]{10, 10, 10, 10, 5, 2, 1}, is(machine.changes(90, 42)));
+        assertThat(new int[]{5, 2, 1}, is(machine.changes(90, 82)));
 
 
     }
