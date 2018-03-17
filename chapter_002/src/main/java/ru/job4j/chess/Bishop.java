@@ -10,24 +10,11 @@ public class Bishop extends Figure {
     Cell[] way(Cell source, Cell dest)  throws ImposibleMoveException {
         Cell[] passingCells = new Cell[Math.abs(source.getX() - dest.getX())];
         if (source.getX() - dest.getX() == source.getY() - dest.getY() || source.getX() + source.getY() == dest.getX() + dest.getY()) {
-            if (source.getX() - dest.getX() < 0 && source.getY() - dest.getY() < 0) {
-                for (int i = 1; i <= passingCells.length; i++) {
-                    passingCells[i - 1] = new Cell(source.getX() + i, source.getY() + i);
-                }
-            } else if (source.getX() - dest.getX() > 0 && source.getY() - dest.getY() < 0) {
-                for (int i = 1; i <= passingCells.length; i++) {
-                    passingCells[i - 1] = new Cell(source.getX() - i, source.getY() + i);
-                }
-            } else if (source.getX() - dest.getX() < 0 && source.getY() - dest.getY() > 0) {
-                for (int i = 1; i <= passingCells.length; i++) {
-                    passingCells[i - 1] = new Cell(source.getX() + i, source.getY() - i);
-                }
-            } else if (source.getX() - dest.getX() > 0 && source.getY() - dest.getY() > 0) {
-                for (int i = 1; i <= passingCells.length; i++) {
-                    passingCells[i - 1] = new Cell(source.getX() - i, source.getY() - i);
-                }
+            int deltaX = (source.getX() - dest.getX()) / Math.abs(source.getX() - dest.getX());
+            int deltaY = (source.getY() - dest.getY()) / Math.abs(source.getY() - dest.getY());
+            for (int i = 1; i <= passingCells.length; i++) {
+                passingCells[i - 1] = new Cell(source.getX() - i * deltaX, source.getY() - i * deltaY);
             }
-
         } else {
             throw new ImposibleMoveException("Фигура так не ходит");
         }

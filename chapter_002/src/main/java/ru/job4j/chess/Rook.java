@@ -10,27 +10,12 @@ public class Rook extends Figure {
     @Override
     Cell[] way(Cell source, Cell dest)  throws ImposibleMoveException {
         Cell[] passingCells;
-        if (source.getX() == dest.getX()) {
-            passingCells = new Cell[Math.abs(source.getY() - dest.getY())];
-            if (source.getY() < dest.getY()) {
-                for (int i = 1; i <= passingCells.length; i++) {
-                    passingCells[i - 1] = new Cell(source.getX(), source.getY() + i);
-                }
-            } else {
-                for (int i = 1; i <= passingCells.length; i++) {
-                    passingCells[i - 1] = new Cell(source.getX(), source.getY() - i);
-                }
-            }
-        } else if (source.getY() == dest.getY()) {
-            passingCells = new Cell[Math.abs(source.getX() - dest.getX())];
-            if (source.getX() < dest.getX()) {
-                for (int i = 1; i <= passingCells.length; i++) {
-                    passingCells[i - 1] = new Cell(source.getX() + i, source.getY());
-                }
-            } else {
-                for (int i = 1; i <= passingCells.length; i++) {
-                    passingCells[i - 1] = new Cell(source.getX() - i, source.getY());
-                }
+        int deltaX = source.getX() - dest.getX() == 0 ? 0 : (source.getX() - dest.getX()) / Math.abs(source.getX() - dest.getX());
+        int deltaY = source.getY() - dest.getY() == 0 ? 0 : (source.getY() - dest.getY()) / Math.abs(source.getY() - dest.getY());
+        if (deltaX == 0 || deltaY == 0) {
+            passingCells = new Cell[deltaX == 0 ? Math.abs(source.getY() - dest.getY()) : Math.abs(source.getX() - dest.getX())];
+            for (int i = 1; i <= passingCells.length; i++) {
+                    passingCells[i - 1] = new Cell(source.getX() - i * deltaX, source.getY() - i * deltaY);
             }
         } else {
             throw new ImposibleMoveException("Фигура так не ходит");
