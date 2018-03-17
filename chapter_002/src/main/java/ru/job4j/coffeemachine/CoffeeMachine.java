@@ -21,7 +21,7 @@ public class CoffeeMachine {
             coinsIndex++;
         }
         int[] output = new int[outPutList.size()];
-        for (int i = 0; i <output.length; i++) {
+        for (int i = 0; i < output.length; i++) {
             output[i] = outPutList.get(i);
         }
         return output;
