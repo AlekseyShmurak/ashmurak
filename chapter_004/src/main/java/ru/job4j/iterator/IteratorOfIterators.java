@@ -20,11 +20,7 @@ public class IteratorOfIterators {
 
             @Override
             public Integer next() {
-                while (hasNext()) {
-                    if (currentIterator.hasNext()) {
-                        break;
-                    }
-                }
+                hasNext();
                 return (Integer) currentIterator.next();
             }
         };
