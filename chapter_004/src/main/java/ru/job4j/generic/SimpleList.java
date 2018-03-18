@@ -28,6 +28,16 @@ public class SimpleList<T> implements Iterable<T> {
         currentPosition--;
     }
 
+    public int getIndex(T value) {
+        int rslt = -1;
+        for (int i = 0; i < objects.length; i++) {
+            if (objects[i].equals(value)) {
+                rslt = i;
+                break;
+            }
+        } return rslt;
+    }
+
     public T get(int index) {
         return (T) this.objects[index];
     }
