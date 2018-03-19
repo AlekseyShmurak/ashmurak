@@ -1,11 +1,12 @@
 package ru.job4j.set;
 
 import ru.job4j.list.DynamicArray;
+import ru.job4j.list.Linked;
 
 import java.util.Iterator;
 
 public class SimpleSet<T> implements Iterable {
-    private DynamicArray<T> container = new DynamicArray();
+    private Linked<T> container = new Linked<>();
 
 
     public void add(T e) {
@@ -16,7 +17,7 @@ public class SimpleSet<T> implements Iterable {
                 break;
             }
         }
-        if(isUnique) {
+        if (isUnique) {
             this.container.add(e);
         }
     }

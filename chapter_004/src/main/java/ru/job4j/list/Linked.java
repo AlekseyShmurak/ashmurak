@@ -42,7 +42,7 @@ public class Linked<T> implements Iterable<T> {
                 if (enteredModCouterVal != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return currentNode.getNext() != null;
+                return currentNode !=null && currentNode.getNext() != null;
             }
 
             @Override
