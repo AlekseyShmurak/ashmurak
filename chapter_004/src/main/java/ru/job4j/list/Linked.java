@@ -57,8 +57,19 @@ public class Linked<T> implements Iterable<T> {
         };
     }
 
+    protected Node getLast() {
+        return last;
+    }
 
-    private class Node {
+    protected Node getFirst() {
+        return first;
+    }
+
+    protected void setFirst(Node first) {
+        this.first = first;
+    }
+
+    protected class Node {
         T value;
         Node next;
 
