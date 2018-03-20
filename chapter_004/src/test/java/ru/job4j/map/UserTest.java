@@ -25,6 +25,6 @@ public class UserTest {
         while (iterator.hasNext()) {
             System.out.println(iterator.next().name);
         }
-        assertThat(2, is(map.keySet().size()));
+        assertThat(1, is(map.keySet().size()));
     }
 }
