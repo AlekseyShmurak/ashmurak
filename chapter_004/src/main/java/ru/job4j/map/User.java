@@ -15,7 +15,11 @@ public class User {
 
     @Override
     public int hashCode() {
-        return 1;
+        int rslt = 17;
+        rslt = 37 * rslt + this.name.hashCode();
+        rslt = 37 * rslt + this.children;
+        rslt = 37 * rslt + this.birthday.hashCode();
+        return rslt;
     }
 
     @Override
