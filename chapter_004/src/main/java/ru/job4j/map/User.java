@@ -12,4 +12,15 @@ public class User {
         this.children = children;
         this.birthday = birthday;
     }
+
+    @Override
+    public int hashCode() {
+        return 1;
+    }
+
+//    @Override
+//    public boolean equals(Object obj) {
+//        return obj != null && obj instanceof User && this.name.equals(((User) obj).name)
+//                && this.children == ((User) obj).children && this.birthday.equals(((User) obj).birthday);
+//    }
 }
