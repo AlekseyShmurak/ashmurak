@@ -14,6 +14,10 @@ public class SimpleHashTable<K, V> {
         return target != null ? target.value : null;
     }
 
+    public boolean containsKey(K key) {
+        return getCell(key) != null;
+    }
+
     private Cell getCell(K key) {
         Cell rslt = null;
         int index = key.hashCode() & (capacity - 1);
