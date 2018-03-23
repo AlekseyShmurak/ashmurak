@@ -23,6 +23,19 @@ public class Linked<T> implements Iterable<T> {
         }
         modCount++;
     }
+    public boolean contains(T value) {
+        boolean rslt = false;
+        Node wanted = first;
+        while (wanted != null) {
+            if (wanted.value.equals(value)) {
+                rslt = true;
+                break;
+            }
+            wanted = wanted.next;
+        }
+        return rslt;
+    }
+
 
     public T get(int index) {
         Node wantedNode = first;

@@ -10,14 +10,7 @@ public class SimpleSet<T> implements Iterable {
 
 
     public void add(T e) {
-        boolean isUnique = true;
-        for (T value : this.container) {
-            if (value.equals(e)) {
-                isUnique = false;
-                break;
-            }
-        }
-        if (isUnique) {
+        if (!container.contains(e)) {
             this.container.add(e);
         }
     }
