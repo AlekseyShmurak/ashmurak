@@ -25,6 +25,17 @@ public class DynamicArray<T> implements Iterable<T> {
         modCount++;
     }
 
+    public boolean contains(T value) {
+        boolean rslt = false;
+        for (T current : this) {
+            if (current.equals(value)) {
+                rslt = true;
+                break;
+            }
+        }
+        return rslt;
+    }
+
     public T get(int index) {
         return container[index];
     }

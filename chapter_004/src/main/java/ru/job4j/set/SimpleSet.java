@@ -6,7 +6,7 @@ import ru.job4j.list.Linked;
 import java.util.Iterator;
 
 public class SimpleSet<T> implements Iterable {
-    private Linked<T> container = new Linked<>();
+    private DynamicArray<T> container = new DynamicArray<>();
 
 
     public void add(T e) {
