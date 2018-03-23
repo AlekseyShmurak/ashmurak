@@ -1,6 +1,6 @@
 package ru.job4j.generic;
 
-public class UserStore extends AbstractStore {
+public class UserStore extends AbstractStore<User> {
 
     public UserStore(int size) {
         this.values = new SimpleList<User>(size);
