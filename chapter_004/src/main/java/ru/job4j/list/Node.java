@@ -9,10 +9,15 @@ class Node<T> {
     }
 
     public boolean hasCycle(Node first) {
-        Node nextNode = first;
-        do {
-            nextNode = nextNode.next;
-        } while (nextNode.next != null && nextNode != first);
-        return nextNode == first;
+        Node rabit = first;
+        Node turtle = first;
+        while (rabit != null && rabit.next != null && rabit.next.next != null) {
+            rabit = rabit.next.next;
+            turtle = turtle.next;
+            if (rabit == turtle) {
+                break;
+            }
+        }
+        return rabit == turtle;
     }
 }
