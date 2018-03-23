@@ -5,23 +5,23 @@ import java.util.Iterator;
 public class IteratorOfIterators {
     Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
         return new Iterator<Integer>() {
-            private Iterator currentIterator = it.next();
+            private Iterator current = it.next();
             @Override
             public boolean hasNext() {
                 while (it.hasNext()) {
-                    if (currentIterator.hasNext()) {
+                    if (current.hasNext()) {
                         break;
                     } else {
-                        currentIterator = it.next();
+                        current = it.next();
                     }
                 }
-                return currentIterator.hasNext();
+                return current.hasNext();
             }
 
             @Override
             public Integer next() {
                 hasNext();
-                return (Integer) currentIterator.next();
+                return (Integer) current.next();
             }
         };
     }
