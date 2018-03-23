@@ -17,6 +17,7 @@ public class PrimeIterator implements Iterator {
         if (index < numbers.length) {
             for (int i = index; i < numbers.length; i++) {
                 if (isPrime(numbers[i])) {
+                    index = i;
                     rstl = true;
                     break;
                 }
@@ -30,15 +31,7 @@ public class PrimeIterator implements Iterator {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        Object rslt = new Object();
-        for (int i = index; i < numbers.length; i++) {
-            if (isPrime(numbers[i])) {
-                index = i + 1;
-                rslt = (Integer) numbers[i];
-                break;
-            }
-        }
-        return rslt;
+        return numbers[index++];
     }
 
     private boolean isPrime(int number) {
