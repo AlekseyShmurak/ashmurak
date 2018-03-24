@@ -18,6 +18,18 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         this.root = root;
     }
 
+    public boolean isBinary() {
+        boolean rslt = true;
+        NodeIterator nods = new NodeIterator();
+        while (nods.hasNext()) {
+            if (nods.next().leaves().size() > 2) {
+                rslt = false;
+                break;
+            }
+        }
+        return rslt;
+    }
+
     @Override
     public boolean add(E parent, E child) {
         boolean rslt = false;
@@ -51,11 +63,30 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
     @Override
     public Iterator<E> iterator() {
-        Queue<Node<E>> values = new LinkedList<>();
-        values.offer(root);
         return new Iterator<E>() {
-            final int expectMod = modCount;
+            NodeIterator nods = new NodeIterator();
+
+            public boolean hasNext() {
+                return nods.hasNext();
+            }
+
             @Override
+            public E next() {
+                return nods.next().getValue();
+            }
+        };
+
+    }
+
+    private class NodeIterator implements Iterator<Node<E>> {
+        Queue<Node<E>> values = new LinkedList<>();
+        final int expectMod = modCount;
+
+        public NodeIterator() {
+            this.values.offer(root);
+        }
+
+        @Override
             public boolean hasNext() {
                 if (expectMod != modCount) {
                     throw new ConcurrentModificationException();
@@ -64,17 +95,15 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             }
 
             @Override
-            public E next() {
-                E rstl = null;
+            public Node<E> next() {
+                Node<E> rstl = null;
                 if (hasNext()) {
-                    Node<E> current = values.poll();
-                    rstl = current.getValue();
-                    for (Node<E> child : current.leaves()) {
+                    rstl = values.poll();
+                    for (Node<E> child : rstl.leaves()) {
                         values.offer(child);
                     }
                 }
                 return rstl;
             }
-        };
     }
 }
