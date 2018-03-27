@@ -8,12 +8,27 @@ public class StringAnalyzer {
         public void run() {
             getWordsNum(string);
         }
-    } );
+    });
+
+
 
     public static void main(String[] args) {
-        StringAnalyzer str = new StringAnalyzer("asdfdfa adfadfa adsf adf adsf adsf qewqe");
-        str.spaceThead.start();
-        str.wordsTread.start();
+        StringAnalyzer str = new StringAnalyzer("asdfdfa adfadfa adsf adf adsf adsf qewqe asdfdfa adfadfa adsf adf adsf adsf qewqe");
+        str.startProg();
+
+    }
+
+    public void startProg() {
+        System.out.println("Start");
+        spaceThead.start();
+        wordsTread.start();
+        try {
+            spaceThead.join();
+            wordsTread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Finish");
     }
 
     public StringAnalyzer(String string) {
@@ -26,9 +41,9 @@ public class StringAnalyzer {
         for (char ch : chars) {
             if (ch == ' ') {
                 spaceCount++;
+                System.out.println("Spaces " + spaceCount);
             }
         }
-        System.out.println(spaceCount);
     }
 
     private void getWordsNum(String string) {
@@ -39,11 +54,11 @@ public class StringAnalyzer {
             if (ch != ' ' && !wordStart) {
                 wordsCount++;
                 wordStart = true;
+                System.out.println("Words " + wordsCount);
             } else if (ch == ' ') {
                 wordStart = false;
             }
         }
-        System.out.println(wordsCount);
     }
 
     private class SpaceCounter implements Runnable {
