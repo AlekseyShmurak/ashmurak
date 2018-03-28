@@ -37,4 +37,25 @@ public class UserStoreTest {
         assertThat(userStore.delete("12"), is(false));
     }
 
+    @Test
+    public void transferTwoTreadsTest() {
+        Thread first = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userStore.add(new User("qewrr",  320));
+                userStore.add(new User("rr",  100));
+            }
+        });
+        Thread second = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userStore.transfer("qewrr", "rr", 100);
+                assertThat(200, is(userStore.findById("qewrr").getAmount()));
+            }
+        });
+        first.start();
+        second.start();
+
+    }
+
 }
