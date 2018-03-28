@@ -89,7 +89,7 @@ public class Linked<T> implements Iterable<T> {
         this.first = first;
     }
 
-    private class Node {
+    protected class Node {
         final T value;
         Node next;
 
