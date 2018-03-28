@@ -1,19 +1,28 @@
 package ru.job4j.list;
 
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
 import java.util.Iterator;
 import java.util.ConcurrentModificationException;
 
+@ThreadSafe
 public class DynamicArray<T> implements Iterable<T> {
+    @GuardedBy("this")
     private T[] container;
     private int currentPosition = 0;
     private int modCount = 0;
+
+    private synchronized T[] getContainer() {
+        return container;
+    }
 
     public DynamicArray() {
         this.container = (T[]) new Object[10];
     }
 
-    public void add(T value) {
+    public synchronized void add(T value) {
         if (currentPosition < this.container.length) {
             this.container[currentPosition++] = value;
         } else {
@@ -36,7 +45,7 @@ public class DynamicArray<T> implements Iterable<T> {
         return rslt;
     }
 
-    public T get(int index) {
+    public synchronized T get(int index) {
         return container[index];
     }
 
@@ -46,19 +55,19 @@ public class DynamicArray<T> implements Iterable<T> {
             int iteratorPosition = 0;
             final int enteredModCouterVal = modCount;
             @Override
-            public boolean hasNext() {
+            public synchronized boolean hasNext() {
                 if (enteredModCouterVal != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return iteratorPosition < container.length && container[iteratorPosition] != null;
+                return iteratorPosition < getContainer().length && getContainer()[iteratorPosition] != null;
             }
 
             @Override
-            public T next() {
+            public synchronized T next() {
                 if (enteredModCouterVal != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return container[iteratorPosition++];
+                return getContainer()[iteratorPosition++];
             }
         };
     }

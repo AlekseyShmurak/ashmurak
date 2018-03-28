@@ -1,16 +1,23 @@
 package ru.job4j.list;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
+@ThreadSafe
 public class Linked<T> implements Iterable<T> {
+
+    @GuardedBy("this")
     private Node first;
+    @GuardedBy("this")
     private Node last;
-    int size = 0;
+    private int size = 0;
     private int modCount = 0;
 
 
-    public void add(T value) {
+    public synchronized void add(T value) {
         if (first == null) {
             first = new Node(value);
             last = first;
@@ -23,7 +30,7 @@ public class Linked<T> implements Iterable<T> {
         }
         modCount++;
     }
-    public boolean contains(T value) {
+    public synchronized boolean contains(T value) {
         boolean rslt = false;
         Node wanted = first;
         while (wanted != null) {
@@ -37,7 +44,7 @@ public class Linked<T> implements Iterable<T> {
     }
 
 
-    public T get(int index) {
+    public synchronized T get(int index) {
         Node wantedNode = first;
         for (int i = 0; i < index; i++) {
             wantedNode = wantedNode.next;
@@ -48,7 +55,7 @@ public class Linked<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            Node currentNode = first;
+            Node currentNode = getFirst();
             final int enteredModCouterVal = modCount;
             @Override
             public boolean hasNext() {
@@ -70,23 +77,23 @@ public class Linked<T> implements Iterable<T> {
         };
     }
 
-    protected Node getLast() {
+    protected synchronized Node getLast() {
         return last;
     }
 
-    protected Node getFirst() {
+    protected synchronized Node getFirst() {
         return first;
     }
 
-    protected void setFirst(Node first) {
+    protected synchronized void setFirst(Node first) {
         this.first = first;
     }
 
-    protected class Node {
-        T value;
+    private class Node {
+        final T value;
         Node next;
 
-        public Node(T value) {
+        Node(T value) {
             this.value = value;
         }
 
