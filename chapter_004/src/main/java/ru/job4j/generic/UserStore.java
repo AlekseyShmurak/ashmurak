@@ -7,30 +7,18 @@ public class UserStore extends AbstractStore<User> {
         this.values = new SimpleList<>(size);
     }
 
-    @Override
-    public void add(Base model) {
-        if (model instanceof User) {
-            super.add(model);
-        }
-    }
-    @Override
-    public boolean replace(String id, Base model) {
-        return  model instanceof User && super.replace(id, model);
-    }
-
-    @Override
-    public synchronized User findById(String id) {
-        return (User) super.findById(id);
-    }
-
     public boolean transfer(String fromId, String toId, int amount) {
         boolean rslt = false;
-        User first = (User) super.findById(fromId);
-        User second = (User) super.findById(toId);
+        int expect = findById(fromId).getAmount() - amount;
+        User first = findById(fromId);
+        User second = findById(toId);
         if (amount <= first.getAmount()) {
             first.setAmount(first.getAmount() - amount);
             second.setAmount(second.getAmount() + amount);
             rslt = true;
+        }
+        if (expect != first.getAmount()) {
+            rslt = transfer(fromId, toId, amount);
         }
         return rslt;
     }

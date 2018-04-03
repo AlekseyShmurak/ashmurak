@@ -5,17 +5,17 @@ import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
 @ThreadSafe
-public abstract class AbstractStore<T extends Base> implements Store {
+public abstract class AbstractStore<T extends Base> implements Store<T> {
     @GuardedBy("this")
     protected SimpleList<T> values;
 
     @Override
-    public synchronized void add(Base model) {
+    public synchronized void add(T model) {
         values.add((T) model);
     }
 
     @Override
-    public synchronized boolean replace(String id, Base model) {
+    public synchronized boolean replace(String id, T model) {
         values.set(values.getIndex((T) findById(id)), (T) model);
         return findById(id) != null;
     }
@@ -31,7 +31,7 @@ public abstract class AbstractStore<T extends Base> implements Store {
     }
 
     @Override
-    public synchronized Base findById(String id) {
+    public synchronized T findById(String id) {
         for (T value : values) {
             if (value != null && value.getId().equals(id)) {
                 return value;
