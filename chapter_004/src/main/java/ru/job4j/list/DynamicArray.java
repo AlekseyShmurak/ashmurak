@@ -6,12 +6,14 @@ import net.jcip.annotations.ThreadSafe;
 
 import java.util.Iterator;
 import java.util.ConcurrentModificationException;
+import java.util.NoSuchElementException;
 
 @ThreadSafe
 public class DynamicArray<T> implements Iterable<T> {
     @GuardedBy("this")
     private T[] container;
     private int currentPosition = 0;
+    @GuardedBy("this")
     private int modCount = 0;
 
     private synchronized T[] getContainer() {
@@ -34,7 +36,7 @@ public class DynamicArray<T> implements Iterable<T> {
         modCount++;
     }
 
-    public boolean contains(T value) {
+    public synchronized boolean contains(T value) {
         boolean rslt = false;
         for (T current : this) {
             if (current.equals(value)) {
@@ -50,7 +52,7 @@ public class DynamicArray<T> implements Iterable<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public synchronized Iterator<T> iterator() {
         return new Iterator<T>() {
             int iteratorPosition = 0;
             final int enteredModCouterVal = modCount;
@@ -64,6 +66,9 @@ public class DynamicArray<T> implements Iterable<T> {
 
             @Override
             public synchronized T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
                 if (enteredModCouterVal != modCount) {
                     throw new ConcurrentModificationException();
                 }

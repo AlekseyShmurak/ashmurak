@@ -5,6 +5,7 @@ import net.jcip.annotations.ThreadSafe;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 @ThreadSafe
 public class Linked<T> implements Iterable<T> {
@@ -13,7 +14,9 @@ public class Linked<T> implements Iterable<T> {
     private Node first;
     @GuardedBy("this")
     private Node last;
+    @GuardedBy("this")
     private int size = 0;
+    @GuardedBy("this")
     private int modCount = 0;
 
 
@@ -53,7 +56,7 @@ public class Linked<T> implements Iterable<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public synchronized Iterator<T> iterator() {
         return new Iterator<T>() {
             Node currentNode = getFirst();
             final int enteredModCouterVal = modCount;
@@ -67,6 +70,9 @@ public class Linked<T> implements Iterable<T> {
 
             @Override
             public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
                 if (enteredModCouterVal != modCount) {
                     throw new ConcurrentModificationException();
                 }
