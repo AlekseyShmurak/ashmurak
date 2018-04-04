@@ -1,24 +1,35 @@
 package ru.job4j.threads;
 
-public class Lock {
-    boolean isLocked = false;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 
-    public void lock() {
+@ThreadSafe
+public class Lock {
+    @GuardedBy("this")
+    private boolean isLocked = false;
+    @GuardedBy("this")
+    private Thread crntThread;
+
+    public synchronized void lock() {
         while (isLocked) {
             System.out.println("Замок закрыт для потока");
             try {
-                Thread.currentThread().sleep(100);
+                wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         isLocked = true;
+        crntThread = Thread.currentThread();
         System.out.println("Поток пререхватил управление");
     }
 
-    public void unlock() {
-        isLocked = false;
-        System.out.println("Замок закрыт");
+    public synchronized void unlock() {
+        if (Thread.currentThread() == crntThread) {
+            isLocked = false;
+            this.notifyAll();
+            System.out.println("Замок закрыт");
+        }
     }
 
 }
