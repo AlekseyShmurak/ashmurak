@@ -8,16 +8,18 @@ import java.util.Queue;
 
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
+
+    @GuardedBy("this")
     private int limit = 3;
 
     @GuardedBy("this")
     private Queue<T> queue = new LinkedList<>();
 
-    public int getLimit() {
+    public synchronized int getLimit() {
         return limit;
     }
 
-    public void setLimit(int limit) {
+    public synchronized void setLimit(int limit) {
         this.limit = limit;
     }
 
@@ -27,7 +29,7 @@ public class SimpleBlockingQueue<T> {
             wait();
         }
         queue.offer(value);
-        this.notify();
+        this.notifyAll();
         System.out.println("offer " + value);
     }
 
