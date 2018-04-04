@@ -1,35 +1,32 @@
 package ru.job4j.threads;
 
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 public class ThreadPool {
     private int threadsLim = Runtime.getRuntime().availableProcessors();
     private boolean isActive = false;
-    private Queue<Runnable> tasks = new  ConcurrentLinkedQueue<>();
-    private final Object lock = new Object();
-
-
+    private BlockingQueue<Runnable> tasks = new LinkedBlockingQueue();
 
     public void addTask(Runnable task) {
-        synchronized (lock) {
-            this.tasks.offer(task);
-            lock.notify();
-        }
+        this.tasks.offer(task);
     }
 
-    public  void finishWorking() {
+    public void finishWorking() {
+        System.out.println("Пул пректатил работу");
         this.isActive = false;
-        synchronized (lock) {
-            lock.notify();
-        }
     }
 
     public void execute() {
-        isActive = true;
-        for (int i = 0; i < threadsLim; i++) {
-            Executor executor = new Executor(i);
-            executor.start();
+        if (!isActive) {
+            isActive = true;
+            System.out.println("Пул запущен");
+            for (int i = 0; i < threadsLim; i++) {
+                Executor executor = new Executor(i);
+                System.out.println("Создан поток № " + i);
+                executor.start();
+            }
         }
     }
 
@@ -41,22 +38,14 @@ public class ThreadPool {
         }
         @Override
         public void run() {
-            synchronized (lock) {
-                while (isActive) {
-                    while (tasks.isEmpty() && isActive) {
-                        try {
-                            System.out.println("Поток " + index + " ожидает");
-                            lock.wait();
-                            System.out.println("Поток " + index + " дождался");
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    } if (!tasks.isEmpty()) {
-                        tasks.poll().run();
-                    }
+            while (isActive) {
+                try {
+                    tasks.poll(5, TimeUnit.SECONDS).run();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (NullPointerException e) {
+                    isActive = false;
                 }
-                System.out.println("Поток " + index + " завершил работу");
-                lock.notify();
             }
         }
     }
