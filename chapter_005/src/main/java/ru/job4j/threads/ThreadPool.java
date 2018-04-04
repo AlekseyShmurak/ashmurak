@@ -6,16 +6,23 @@ import java.util.concurrent.TimeUnit;
 
 public class ThreadPool {
     private int threadsLim = Runtime.getRuntime().availableProcessors();
-    private boolean isActive = false;
+    private volatile boolean isActive = false;
     private BlockingQueue<Runnable> tasks = new LinkedBlockingQueue();
+    private final Object queueLock = new Object();
 
     public void addTask(Runnable task) {
-        this.tasks.offer(task);
+        synchronized (queueLock) {
+            this.tasks.offer(task);
+            queueLock.notify();
+        }
     }
 
     public void finishWorking() {
         System.out.println("Пул пректатил работу");
         this.isActive = false;
+        synchronized (queueLock) {
+            queueLock.notify();
+        }
     }
 
     public void execute() {
@@ -39,12 +46,22 @@ public class ThreadPool {
         @Override
         public void run() {
             while (isActive) {
-                try {
-                    tasks.poll(5, TimeUnit.SECONDS).run();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (NullPointerException e) {
-                    isActive = false;
+                if (tasks.isEmpty()) {
+                    synchronized (queueLock) {
+                        try {
+                            queueLock.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    try {
+                        tasks.poll(5, TimeUnit.SECONDS).run();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
