@@ -17,7 +17,7 @@ public class Linked<T> implements Iterable<T> {
     @GuardedBy("this")
     private int size = 0;
     @GuardedBy("this")
-    private int modCount = 0;
+    private volatile int modCount = 0;
 
 
     public synchronized void add(T value) {

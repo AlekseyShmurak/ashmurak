@@ -14,7 +14,7 @@ public class DynamicArray<T> implements Iterable<T> {
     private T[] container;
     private int currentPosition = 0;
     @GuardedBy("this")
-    private int modCount = 0;
+    private volatile int modCount = 0;
 
     private synchronized T[] getContainer() {
         return container;
