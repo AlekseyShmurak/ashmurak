@@ -36,7 +36,7 @@ public class InterruptThread {
                     System.out.println("Time " + i);
                 }
             }
-            charThread.interrupt();
+            timeThread.interrupt();
         }
     }
 
@@ -45,6 +45,9 @@ public class InterruptThread {
         public void run() {
             char[] chars = string.toCharArray();
             for (char ch : chars) {
+                if (timeThread.isInterrupted() || !timeThread.isAlive()) {
+                    break;
+                }
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
