@@ -10,24 +10,24 @@ public class UnblockingCache<T> {
         return container.get(id).value;
     }
 
-    public void add(String id,T value) {
+    public void add(String id, T value) {
         if (container.containsKey(id)) {
             update(id, value);
         } else {
-            container.put(id,new Model(value));
+            container.put(id, new Model(value));
         }
     }
 
     public boolean delete(String id) {
         boolean rslt = false;
-        if (container.containsKey(id)){
+        if (container.containsKey(id)) {
             container.remove(id);
             rslt = true;
         }
         return rslt;
     }
 
-    public boolean update(String id , T value) {
+    public boolean update(String id, T value) {
         boolean rslt = false;
         int expectVer;
         if (container.containsKey(id)) {
