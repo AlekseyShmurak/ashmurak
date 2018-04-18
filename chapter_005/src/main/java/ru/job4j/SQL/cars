@@ -1,0 +1,38 @@
+CREATE TABLE transmission (
+	trans_id serial PRIMARY KEY,
+	model varchar(50) 
+);
+
+CREATE TABLE engine (
+	engine_id serial PRIMARY KEY,
+	model varchar(50) 
+);
+
+CREATE TABLE cars (
+	car_id serial PRIMARY KEY,
+	model varchar(50),
+	trans_id integer REFERENCES transmission(trans_id),
+	engine_id integer REFERENCES engine(engine_id)
+);
+
+INSERT INTO engine (model) VALUES ('engine1'),
+('engine2'),
+('engine3'),
+('engine4'),
+('engine5');
+
+INSERT INTO transmission (model) VALUES ('trans1'),
+('trans2'),
+('trans3'),
+('trans4'),
+('trans5');
+
+INSERT INTO cars (model,trans_id,engine_id) VALUES ('car1', 1 , 1),
+('car2', 2 , 2),
+('car4', 4 , 4),
+
+SELECT * FROM cars;
+
+SELECT t.model, e.model FROM cars cars
+		RIGHT OUTER JOIN engine e ON cars.engine_id = e.engine_id
+		FULL JOIN transmission t ON cars.trans_id = t.trans_id WHERE cars.car_id IS NULL;
