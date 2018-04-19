@@ -14,7 +14,7 @@ public class UnblockingCache<T> {
         if (container.containsKey(id)) {
             update(id, value);
         } else {
-            container.put(id, new Model(value));
+            container.computeIfAbsent(id, (k)-> new Model(value));
         }
     }
 
@@ -29,15 +29,13 @@ public class UnblockingCache<T> {
 
     public boolean update(String id, T value) {
         boolean rslt = false;
-        int expectVer;
-        if (container.containsKey(id)) {
-            expectVer = container.get(id).versoin;
-            Model model = new Model(value);
-            model.versoin = expectVer + 1;
-            if (expectVer == container.get(id).versoin) {
-                container.replace(id, model);
-                rslt = true;
-            }
+        if ( container.computeIfPresent(id,(k,v)-> {
+            int expVer = v.versoin;
+            Model mod = new Model(value);
+            mod.versoin = expVer + 1;
+            return mod;
+        }) != null) {
+            rslt = true;
         }
         return rslt;
     }
