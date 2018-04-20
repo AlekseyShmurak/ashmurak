@@ -29,10 +29,13 @@ public class UnblockingCache<T> {
 
     public boolean update(String id, T value) {
         boolean rslt = false;
-        if ( container.computeIfPresent(id,(k,v)-> {
+        if (container.computeIfPresent(id, (k, v) -> {
             int expVer = v.versoin;
             Model mod = new Model(value);
             mod.versoin = expVer + 1;
+            if (expVer != v.versoin) {
+                mod = null;
+            }
             return mod;
         }) != null) {
             rslt = true;
