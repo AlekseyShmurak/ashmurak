@@ -74,7 +74,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             System.out.println("----------- Редактирование заявки -----------");
-            Item editable = tracker.findById(input.ask("Введите Id редактируемой заявки"));
+            Item editable = tracker.findById(Integer.parseInt(input.ask("Введите Id редактируемой заявки")));
             editable.setName(input.ask("Введите новое имя заявки"));
             editable.setDesc(input.ask("Введите новое описание заявки"));
             tracker.replace(editable.getId(), editable);
@@ -109,7 +109,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
              System.out.println("------------ Поиск заявки по Id ------------");
-             Item item = tracker.findById(input.ask("Введите Id заявки"));
+             Item item = tracker.findById(Integer.parseInt(input.ask("Введите Id заявки")));
              showItem(item);
              System.out.println();
         }
@@ -143,7 +143,7 @@ class Delete extends BaseAction {
     @Override
     public void execute(Input input, Tracker tracker) {
         System.out.println("----------- Удаление заявки -----------");
-        tracker.delete(input.ask("Введите Id заявки на удаление"));
+        tracker.delete(Integer.parseInt(input.ask("Введите Id заявки на удаление")));
         System.out.println("Заявка удалена");
         System.out.println();
     }

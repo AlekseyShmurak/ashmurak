@@ -40,6 +40,7 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();     // создаём Tracker
+        tracker.deleteAllItems();
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});   //создаём StubInput с последовательностью действий
         new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
         assertThat(tracker.getAll().get(0).getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
@@ -53,7 +54,7 @@ public class StartUITest {
         //Напрямую добавляем заявку
         Item item = tracker.add(new Item());
         //создаём StubInput с последовательностью действий
-        Input input = new StubInput(new String[]{"2", item.getId(), "test name", "desc", "6"});
+        Input input = new StubInput(new String[]{"2", "" + item.getId(), "test name", "desc", "6"});
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
@@ -63,9 +64,10 @@ public class StartUITest {
     @Test
     public void deleteItemTest() {
         Tracker tracker = new Tracker();
+        tracker.deleteAllItems();
         tracker.add(new Item("First", "asdf"));
         tracker.add(new Item("Second", "asdf"));
-        Input input = new StubInput(new String[]{"3", tracker.findAll().get(0).getId(), "6"});
+        Input input = new StubInput(new String[]{"3", "" + tracker.findAll().get(0).getId(), "6"});
         new StartUI(input, tracker).init();
         assertThat(1, is(tracker.findAll().size()));
         assertThat("Second", is(tracker.findAll().get(0).getName()));
@@ -82,6 +84,7 @@ public class StartUITest {
     @Test
     public void showAllItemsTest() {
         Tracker tracker = new Tracker();
+        tracker.deleteAllItems();
         tracker.add(new Item("First", "asdf"));
         tracker.add(new Item("Second", "asdf"));
         Input input = new StubInput(new String[]{"1", "6"});
@@ -96,6 +99,7 @@ public class StartUITest {
     @Test
     public void showOneNameItemsTest() {
         Tracker tracker = new Tracker();
+        tracker.deleteAllItems();
         tracker.add(new Item("First", "asdf"));
         tracker.add(new Item("First", "qwert"));
         Input input = new StubInput(new String[]{"5", "First", "6"});
@@ -110,8 +114,9 @@ public class StartUITest {
     @Test
     public void findByIdTest() {
         Tracker tracker = new Tracker();
+        tracker.deleteAllItems();
         tracker.add(new Item("First", "asdf"));
-        Input input = new StubInput(new String[]{"4", tracker.getAll().get(0).getId(), "6"});
+        Input input = new StubInput(new String[]{"4", "" + tracker.getAll().get(0).getId(), "6"});
         new StartUI(input, tracker).init();
         assertThat(out.toString(), is(menuStr
                 + String.format("------------ Поиск заявки по Id ------------%n"

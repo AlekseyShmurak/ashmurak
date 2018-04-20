@@ -3,13 +3,15 @@ package ru.job4j.tracker;
 import java.time.LocalDateTime;
 
 public class Item {
-    private String id;
+    private int id;
     private String name;
     private String desc;
     private String created;
     private String[] comments;
 
     Item() {
+        name = "bla";
+        desc = "blabla";
     }
 
     Item(String name, String desc) {
@@ -19,6 +21,14 @@ public class Item {
     }
 
     Item(String name, String desc, String created) {
+        this.name = name;
+        this.desc = desc;
+        setCreated();
+        this.created = created;
+    }
+
+    Item(int id, String name, String desc, String created) {
+        this.id = id;
         this.name = name;
         this.desc = desc;
         setCreated();
@@ -50,10 +60,10 @@ public class Item {
     public void setComments(String[] comments) {
         this.comments = comments;
     }
-    public String getId() {
+    public int getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 }
