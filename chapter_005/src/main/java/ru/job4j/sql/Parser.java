@@ -1,4 +1,4 @@
-package ru.job4j.SQL;
+package ru.job4j.sql;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -25,14 +25,14 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 public class Parser {
-    private File genFile = new File("src/main/java/ru/job4j/SQL/1.xml");
-    private File transFile = new File("src/main/java/ru/job4j/SQL/2.xml");
+    private File genFile = new File("src/main/java/ru/job4j/sql/1.xml");
+    private File transFile = new File("src/main/java/ru/job4j/sql/2.xml");
 
 
     public void init(int n) {
         Root root = new Root();
 
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:src/main/java/ru/job4j/SQL/sample.db");
+        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:src/main/java/ru/job4j/sql/sample.db");
              Statement statement = connection.createStatement();) {
             connection.setAutoCommit(false);
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS test (field INTEGER )");
@@ -41,7 +41,7 @@ public class Parser {
                 String sql = "INSERT INTO test VALUES (" + i + ")";
                 statement.executeUpdate(sql);
             }
-            try (ResultSet resultSet = statement.executeQuery("SELECT * FROM test");){
+            try (ResultSet resultSet = statement.executeQuery("SELECT * FROM test");) {
                 while (resultSet.next()) {
                     Field field = new Field();
                     field.setField(resultSet.getInt(1));
@@ -65,7 +65,7 @@ public class Parser {
 
         TransformerFactory transFact = TransformerFactory.newInstance();
         try {
-            Transformer trans = transFact.newTransformer(new StreamSource(new File("src/main/java/ru/job4j/SQL/style.xsl")));
+            Transformer trans = transFact.newTransformer(new StreamSource(new File("src/main/java/ru/job4j/sql/style.xsl")));
             trans.transform(new StreamSource(genFile), new StreamResult(transFile));
         } catch (TransformerConfigurationException e) {
             e.printStackTrace();
@@ -82,7 +82,7 @@ public class Parser {
             DocumentBuilder builder = f.newDocumentBuilder();
             Document doc = builder.parse(transFile);
             NodeList entries = doc.getElementsByTagName("entry");
-            for (int i = 0;i < entries.getLength(); i++) {
+            for (int i = 0; i < entries.getLength(); i++) {
                 Node entry = entries.item(i);
                 int field = Integer.parseInt(entry.getAttributes().getNamedItem("field").getNodeValue());
                 rslt += field;
