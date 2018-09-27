@@ -4,4 +4,4 @@
 # ashmurak
 
 
-Bla Bla Bla
+Educational project
